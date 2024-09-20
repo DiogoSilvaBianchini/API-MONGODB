@@ -13,10 +13,15 @@ git clone https://github.com/DiogoSilvaBianchini/API-MONGODB.git
 npm i
 ```
 
-3. Utilize o script makefile:
+3. Inicie o container:
+```
+docker-compose up
+```
+ou utilize o script makefile:
 ```
 make up
 ```
+
 ## Como utilizar com Node.js <img width="20px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" />        
 
 1. Faça o clone do projeto:
