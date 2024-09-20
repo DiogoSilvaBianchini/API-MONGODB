@@ -56,9 +56,10 @@ class UserController{
         }
     }
 
-    static async removeUser(token, req, res, next){
+    static async removeUser(req, res, next){
+        const { id } = req.params
         try {
-            const remove = await userModel.findByIdAndDelete({_id: token.id})
+            const remove = await userModel.findByIdAndDelete({_id: id})
             console.log(remove)
             return res.status(201).json({msg: "Usuario removido com sucesso", results: [], status: 201})
         } catch (error) {

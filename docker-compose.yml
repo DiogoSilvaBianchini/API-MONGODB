@@ -2,15 +2,27 @@ services:
   database_mongoDB:
     image: mongo
     container_name: MONGO_DB
-    networks:
-      - app_network
     ports:
       - ${DB_PORT}:27017
     volumes:
       - ./database:/data/db
     environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER_NAME}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
-networks:
-  app_network:
-    driver: bridge
+  api_mongoDB:
+    image: node:latest
+    container_name: api
+    depends_on:
+      - database_mongoDB
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run start
+    logging:
+      driver: 'json-file'
+      options:  
+        max-size: "10m"
+        max-file: "5"
